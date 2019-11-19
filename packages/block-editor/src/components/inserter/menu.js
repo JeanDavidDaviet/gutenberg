@@ -301,7 +301,6 @@ export class InserterMenu extends Component {
 						className="editor-inserter__search block-editor-inserter__search"
 						autoFocus
 						onChange={ this.onChangeSearchInput }
-						onFocus={ ( event ) => ( event.stopPropagation() ) }
 					/>
 
 					<div
