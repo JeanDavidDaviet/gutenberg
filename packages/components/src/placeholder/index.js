@@ -3,6 +3,7 @@
  */
 import classnames from 'classnames';
 import { isString } from 'lodash';
+import useResizeAware from 'react-resize-aware';
 
 /**
  * Internal dependencies
@@ -16,10 +17,12 @@ import Dashicon from '../dashicon';
  * @return {Object}       The rendered placeholder.
  */
 function Placeholder( { icon, children, label, instructions, className, notices, preview, isColumnLayout, ...additionalProps } ) {
+	const [ resizeListener, { width } ] = useResizeAware();
 	const classes = classnames( 'components-placeholder', className );
 	const fieldsetClasses = classnames( 'components-placeholder__fieldset', { 'is-column-layout': isColumnLayout } );
 	return (
 		<div { ...additionalProps } className={ classes }>
+			{ resizeListener }
 			{ notices }
 			{ preview &&
 				<div className="components-placeholder__preview">
@@ -30,7 +33,7 @@ function Placeholder( { icon, children, label, instructions, className, notices,
 				{ isString( icon ) ? <Dashicon icon={ icon } /> : icon }
 				{ label }
 			</div>
-			{ !! instructions && <div className="components-placeholder__instructions">{ instructions }</div> }
+			{ !! instructions && ( width === null || width >= 320 ) && <div className="components-placeholder__instructions">{ instructions }</div> }
 			<div className={ fieldsetClasses }>
 				{ children }
 			</div>
