@@ -202,7 +202,6 @@ class BlockList extends Component {
 			hasMultiSelection,
 			renderAppender,
 			enableAnimation,
-			__experimentalPreventAppenderFocus: preventAppenderFocus,
 		} = this.props;
 
 		return (
@@ -242,7 +241,6 @@ class BlockList extends Component {
 				} ) }
 
 				<BlockListAppender
-					__experimentalPreventAppenderFocus={ preventAppenderFocus }
 					rootClientId={ rootClientId }
 					renderAppender={ renderAppender }
 				/>

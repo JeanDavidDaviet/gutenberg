@@ -33,7 +33,6 @@ export const SocialLinksEdit = function( { className } ) {
 				templateLock={ false }
 				template={ TEMPLATE }
 				__experimentalMoverDirection={ 'horizontal' }
-				__experimentalPreventAppenderFocus={ true }
 			/>
 		</div>
 	);

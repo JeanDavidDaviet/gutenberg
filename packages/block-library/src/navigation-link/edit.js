@@ -246,8 +246,7 @@ function NavigationLinkEdit( {
 				</div>
 				<InnerBlocks
 					allowedBlocks={ [ 'core/navigation-link' ] }
-					renderAppender={ hasDescendants ? InnerBlocks.ButtonBlockAppender : false }
-					__experimentalPreventAppenderFocus={ true }
+					renderAppender={ hasDescendants ? InnerBlocks.UnfocusableButtonBlockAppender : false }
 				/>
 			</div>
 		</Fragment>

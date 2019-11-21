@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { last, noop } from 'lodash';
+import { last } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -22,7 +22,6 @@ function BlockListAppender( {
 	canInsertDefaultBlock,
 	isLocked,
 	renderAppender: CustomAppender,
-	__experimentalPreventAppenderFocus,
 } ) {
 	if ( isLocked ) {
 		return null;
@@ -47,13 +46,7 @@ function BlockListAppender( {
 	// provided and the context supports use of the default appender.
 	if ( canInsertDefaultBlock ) {
 		return (
-			<div
-				className="block-list-appender"
-				onFocus={ ( event ) => {
-					return __experimentalPreventAppenderFocus ? event.stopPropagation() : noop();
-				} }
-				tabIndex={ __experimentalPreventAppenderFocus ? -1 : undefined }
-			>
+			<div className="block-list-appender">
 				<IgnoreNestedEvents childHandledEvents={ [ 'onFocus', 'onClick', 'onKeyDown' ] }>
 					<DefaultBlockAppender
 						rootClientId={ rootClientId }
@@ -67,13 +60,7 @@ function BlockListAppender( {
 	// Fallback in the case no renderAppender has been provided and the
 	// default block can't be inserted.
 	return (
-		<div
-			className="block-list-appender"
-			onFocus={ ( event ) => {
-				return __experimentalPreventAppenderFocus ? event.stopPropagation() : noop();
-			} }
-			tabIndex={ __experimentalPreventAppenderFocus ? -1 : undefined }
-		>
+		<div className="block-list-appender">
 			<ButtonBlockAppender
 				rootClientId={ rootClientId }
 				className="block-list-appender__toggle"
