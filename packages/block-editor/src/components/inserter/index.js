@@ -33,6 +33,7 @@ const defaultRenderToggle = ( { onToggle, disabled, isOpen, blockTitle, hasSingl
 			icon="insert"
 			label={ label }
 			labelPosition="bottom"
+			onMouseDown={ ( event ) => event.preventDefault() }
 			onClick={ onToggle }
 			className="editor-inserter__toggle block-editor-inserter__toggle"
 			aria-haspopup={ ! hasSingleBlockType ? 'true' : false }
@@ -77,15 +78,8 @@ class Inserter extends Component {
 			hasSingleBlockType,
 			renderToggle = defaultRenderToggle,
 		} = this.props;
-		return (
 
-			<div
-				tabIndex={ 0 }
-				role={ 'button' }
-				onMouseDown={ ( event ) => event.preventDefault() } >
-				{ renderToggle( { onToggle, isOpen, disabled, blockTitle, hasSingleBlockType } ) }
-			</div>
-		);
+		return renderToggle( { onToggle, isOpen, disabled, blockTitle, hasSingleBlockType } );
 	}
 
 	/**
