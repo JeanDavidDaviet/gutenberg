@@ -8,7 +8,7 @@ import { get } from 'lodash';
 import { speak } from '@wordpress/a11y';
 import { __, _x, sprintf } from '@wordpress/i18n';
 import { Dropdown, IconButton } from '@wordpress/components';
-import { Component } from '@wordpress/element';
+import { createRef, forwardRef, Component } from '@wordpress/element';
 import { withDispatch, withSelect } from '@wordpress/data';
 import { compose, ifCondition } from '@wordpress/compose';
 import {
@@ -20,7 +20,7 @@ import {
  */
 import InserterMenu from './menu';
 
-const defaultRenderToggle = ( { onToggle, disabled, isOpen, blockTitle, hasSingleBlockType } ) => {
+const defaultRenderToggle = forwardRef( ( { onToggle, disabled, isOpen, blockTitle, hasSingleBlockType }, toggleRef ) => {
 	let label;
 	if ( hasSingleBlockType ) {
 		// translators: %s: the name of the block when there is only one
@@ -30,6 +30,7 @@ const defaultRenderToggle = ( { onToggle, disabled, isOpen, blockTitle, hasSingl
 	}
 	return (
 		<IconButton
+			ref={ toggleRef }
 			icon="insert"
 			label={ label }
 			labelPosition="bottom"
@@ -41,7 +42,7 @@ const defaultRenderToggle = ( { onToggle, disabled, isOpen, blockTitle, hasSingl
 			disabled={ disabled }
 		/>
 	);
-};
+} );
 
 class Inserter extends Component {
 	constructor() {
@@ -50,6 +51,7 @@ class Inserter extends Component {
 		this.onToggle = this.onToggle.bind( this );
 		this.renderToggle = this.renderToggle.bind( this );
 		this.renderContent = this.renderContent.bind( this );
+		this.toggleRef = createRef();
 	}
 
 	onToggle( isOpen ) {
@@ -76,10 +78,10 @@ class Inserter extends Component {
 			disabled,
 			blockTitle,
 			hasSingleBlockType,
-			renderToggle = defaultRenderToggle,
+			renderToggle = defaultRenderToggle.render,
 		} = this.props;
 
-		return renderToggle( { onToggle, isOpen, disabled, blockTitle, hasSingleBlockType } );
+		return renderToggle( { onToggle, isOpen, disabled, blockTitle, hasSingleBlockType }, this.toggleRef );
 	}
 
 	/**
@@ -99,12 +101,12 @@ class Inserter extends Component {
 			showInserterHelpPanel,
 			__experimentalSelectBlockOnInsert: selectBlockOnInsert,
 		} = this.props;
-
 		return (
 			<InserterMenu
 				onSelect={ onClose }
 				rootClientId={ rootClientId }
 				clientId={ clientId }
+				toggleRef={ this.toggleRef }
 				isAppender={ isAppender }
 				showInserterHelpPanel={ showInserterHelpPanel }
 				__experimentalSelectBlockOnInsert={ selectBlockOnInsert }

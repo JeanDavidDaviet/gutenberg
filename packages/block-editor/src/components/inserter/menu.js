@@ -43,7 +43,7 @@ import {
 } from '@wordpress/blocks';
 import { withDispatch, withSelect } from '@wordpress/data';
 import { withInstanceId, compose, withSafeTimeout } from '@wordpress/compose';
-import { LEFT, RIGHT, UP, DOWN, BACKSPACE, ENTER } from '@wordpress/keycodes';
+import { LEFT, RIGHT, UP, DOWN, BACKSPACE, ENTER, ESCAPE } from '@wordpress/keycodes';
 import { addQueryArgs } from '@wordpress/url';
 
 /**
@@ -252,15 +252,18 @@ export class InserterMenu extends Component {
 		debouncedSpeak( resultsFoundMessage );
 	}
 
-	onKeyDown( event ) {
+	onKeyDown( event, toggleRef ) {
 		if ( includes( [ LEFT, DOWN, RIGHT, UP, BACKSPACE, ENTER ], event.keyCode ) ) {
 			// Stop the key event from propagating up to ObserveTyping.startTypingInTextField.
 			event.stopPropagation();
 		}
+		if ( includes( [ ESCAPE ], event.keyCode ) ) {
+			toggleRef.current.focus();
+		}
 	}
 
 	render() {
-		const { instanceId, onSelect, rootClientId, showInserterHelpPanel } = this.props;
+		const { instanceId, onSelect, rootClientId, showInserterHelpPanel, toggleRef } = this.props;
 		const {
 			childItems,
 			hoveredItem,
@@ -288,7 +291,7 @@ export class InserterMenu extends Component {
 					'has-help-panel': hasHelpPanel,
 				} ) }
 				onKeyPress={ stopKeyPropagation }
-				onKeyDown={ this.onKeyDown }
+				onKeyDown={ ( event ) => ( this.onKeyDown( event, toggleRef ) ) }
 			>
 				<div className="block-editor-inserter__main-area">
 					<label htmlFor={ `block-editor-inserter__search-${ instanceId }` } className="screen-reader-text">
