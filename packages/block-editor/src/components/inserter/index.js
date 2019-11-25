@@ -77,8 +77,15 @@ class Inserter extends Component {
 			hasSingleBlockType,
 			renderToggle = defaultRenderToggle,
 		} = this.props;
+		return (
 
-		return renderToggle( { onToggle, isOpen, disabled, blockTitle, hasSingleBlockType } );
+			<div
+				tabIndex={ 0 }
+				role={ 'button' }
+				onMouseDown={ ( event ) => event.preventDefault() } >
+				{ renderToggle( { onToggle, isOpen, disabled, blockTitle, hasSingleBlockType } ) }
+			</div>
+		);
 	}
 
 	/**
