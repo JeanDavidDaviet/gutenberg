@@ -19,7 +19,6 @@ import { compose } from '@wordpress/compose';
  */
 import ButtonBlockAppender from './button-block-appender';
 import DefaultBlockAppender from './default-block-appender';
-import UnfocusableButtonBlockAppender from './unfocusable-button-block-appender';
 
 /**
  * Internal dependencies
@@ -185,7 +184,6 @@ InnerBlocks = compose( [
 // Expose default appender placeholders as components.
 InnerBlocks.DefaultBlockAppender = DefaultBlockAppender;
 InnerBlocks.ButtonBlockAppender = ButtonBlockAppender;
-InnerBlocks.UnfocusableButtonBlockAppender = UnfocusableButtonBlockAppender;
 
 InnerBlocks.Content = withBlockContentContext(
 	( { BlockContent } ) => <BlockContent />

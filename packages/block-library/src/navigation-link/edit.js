@@ -220,7 +220,6 @@ function NavigationLinkEdit( {
 						value={ label }
 						onChange={ ( labelValue ) => setAttributes( { label: labelValue } ) }
 						placeholder={ itemLabelPlaceholder }
-						keepPlaceholderOnFocus={ true }
 						withoutInteractiveFormatting
 					/>
 					{ isLinkOpen && (
@@ -246,7 +245,7 @@ function NavigationLinkEdit( {
 				</div>
 				<InnerBlocks
 					allowedBlocks={ [ 'core/navigation-link' ] }
-					renderAppender={ hasDescendants ? InnerBlocks.UnfocusableButtonBlockAppender : false }
+					renderAppender={ hasDescendants ? InnerBlocks.ButtonBlockAppender : false }
 				/>
 			</div>
 		</Fragment>
