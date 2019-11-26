@@ -100,3 +100,19 @@
 		margin-right: 0;
 	}
 }
+
+// Element queries to show different layouts at various sizes.
+.components-placeholder {
+	&.size-md,
+	&.size-sm {
+		.components-placeholder__instructions {
+			display: none;
+		}
+	}
+
+	&.size-sm {
+		.block-editor-block-icon {
+			display: none;
+		}
+	}
+}
