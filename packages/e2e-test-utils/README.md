@@ -183,7 +183,7 @@ _Parameters_
 
 _Returns_
 
--   `?puppeteer.ElementHandle`: Object that represents an in-page DOM element.
+-   `?ElementHandle`: Object that represents an in-page DOM element.
 
 <a name="findSidebarPanelWithTitle" href="#findSidebarPanelWithTitle">#</a> **findSidebarPanelWithTitle**
 
@@ -195,7 +195,7 @@ _Parameters_
 
 _Returns_
 
--   `?puppeteer.ElementHandle`: Object that represents an in-page DOM element.
+-   `?ElementHandle`: Object that represents an in-page DOM element.
 
 <a name="getAllBlockInserterItemTitles" href="#getAllBlockInserterItemTitles">#</a> **getAllBlockInserterItemTitles**
 

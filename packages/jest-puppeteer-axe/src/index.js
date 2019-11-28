@@ -3,6 +3,8 @@
  */
 import AxePuppeteer from 'axe-puppeteer';
 
+/** @typedef {import('./puppeteer').Page} Page */
+
 /**
  * Formats the list of violations object returned by Axe analysis.
  *
@@ -53,7 +55,7 @@ function formatViolations( violations ) {
  *
  * @see https://github.com/dequelabs/axe-puppeteer
  *
- * @param {puppeteer.Page} page                 Puppeteer's page instance.
+ * @param {Page}           page                 Puppeteer's page instance.
  * @param {?Object}        params               Optional Axe API options.
  * @param {?string|Array}  params.include       CSS selector(s) to add to the list of elements
  *                                              to include in analysis.
